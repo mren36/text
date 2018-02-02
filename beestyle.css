@@ -1,0 +1,9 @@
+h1 {font-family: cursive; color: yellow}
+header
+{
+  background-color: black;
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+p, text {color: red; font-size: large; font-weight: bold;}

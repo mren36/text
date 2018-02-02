@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>'Bee' Density in The Bee Movie</title>
+    <link href="beestyle.css" type="text/css" rel="stylesheet">
+</head>
+<body background ="bees.jpeg">
+<script src='https://d3js.org/d3.v4.min.js'></script>
+
+<div id ="container">
+  <header>
+    <h1>'Bee' Density in <i>The Bee Movie</i></h1>
+  </header>
+	<p>
+		The following is a graph of the frequency of the word 'bee' in <i>The Bee Movie</i> in various time intervals across the movie.
+</div>
+<script>
+const width = 800,
+      height = 600,
+      margin = {
+          top: 50,
+          bottom: 50,
+          left: 50,
+          right: 50,
+      };
+
+var svg = d3.select("#container").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .style("margin", "0 auto")
+    .style("display", "block")
+
+var x_range = [0, 2737];
+var y_range = [0, 15];
+
+var x = d3.scaleLinear()
+    .domain(x_range)
+    .range([margin.left, width - margin.right])
+
+var y = d3.scaleLinear()
+    .domain(y_range)
+    .range([height - margin.bottom, margin.top])
+
+d3.json("beemovie.json", function(error_json, dataset_json) {
+  svg.selectAll("rect")
+    .data(dataset_json)
+    .enter()
+    .append("rect")
+    .attr("x", function(d, i){
+      if (i % 50 == 0 && i <= 2736-50) {
+        return x(i);
+      }
+      else {
+        return 0;
+      }
+    })
+    .attr("width", x(50)-x(0))
+    .attr("height", function(d, i){
+      if (i % 50 == 0 && i <= 2736-50) {
+        var count = 0;
+        for (var j = 0; j < 50; j++)
+        {
+          count += dataset_json[i+j][2];
+        }
+        console.log(count);
+        return y(0)-y(count);
+      }
+      else {
+        return 0;
+      }
+    })
+    .attr("y", function(d, i){
+      if (i % 50 == 0 && i <= 2736-50) {
+        var count = 0;
+        for (var j = 0; j < 50; j++)
+        {
+          count += dataset_json[i+j][2];
+        }
+        console.log(count);
+        return y(count);
+      }
+      else {
+        return 0;
+      }})
+      .style("fill", function(d, i){
+        if (i % 100 < 50) {
+          return "yellow";
+        }
+      })
+      .style("opacity", 1)
+
+})
+svg.append("g")
+    .attr("transform", "translate(0, " + (height - margin.bottom) + ")")
+    .attr("class", "xaxis")
+    .call(d3.axisBottom(x).ticks(0));
+
+svg.append("g")
+    .attr("transform", `translate(${margin.left}, 0)`)
+    .attr("class", "yaxis")
+    .call(d3.axisLeft(y).ticks(3));
+
+svg.append("text")
+    .attr("text-anchor", "middle")
+    .attr("transform", "translate(" + (width + margin.left - margin.right)/2 + ", " + (height - margin.bottom/2) + ")")
+    .text("Time")
+    .style("fill", "red")
+
+svg.append("text")
+    .attr("text-anchor", "middle")
+    .attr("transform", "translate(" + (margin.left/2) + ", " + (height + margin.top - margin.bottom)/2 + ")rotate(-90)")
+    .text("Number of times 'bee' was said")
+    .style("fill", "red")
+</script>
+</body>
+</html>
