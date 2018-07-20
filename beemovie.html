@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset='utf-8'>
-    <title>'Bee' Density in The Bee Movie</title>
+    <title>Плотность «Пчелы» в фильме «Пчела»</title>
     <link href="beestyle.css" type="text/css" rel="stylesheet">
 </head>
 <body background ="bees.jpeg">
@@ -10,10 +10,10 @@
 
 <div id ="container">
   <header>
-    <h1>'Bee' Density in <i>The Bee Movie</i></h1>
+    <h1>Плотность «Bee» в <i> Фильм о пчелах </ i></h1>
   </header>
 	<p>
-		The following is a graph of the frequency of the word 'bee' in <i>The Bee Movie</i> in various time intervals across the movie.
+		Ниже приведен график частоты слова «пчела» в <i> Пчелиный фильм </i> в разные временные интервалы в фильме.
 </div>
 <script>
 const width = 800,
@@ -104,13 +104,13 @@ svg.append("g")
 svg.append("text")
     .attr("text-anchor", "middle")
     .attr("transform", "translate(" + (width + margin.left - margin.right)/2 + ", " + (height - margin.bottom/2) + ")")
-    .text("Time")
+    .text("Время")
     .style("fill", "red")
 
 svg.append("text")
     .attr("text-anchor", "middle")
     .attr("transform", "translate(" + (margin.left/2) + ", " + (height + margin.top - margin.bottom)/2 + ")rotate(-90)")
-    .text("Number of times 'bee' was said")
+    .text("Было указано количество «пчел»")
     .style("fill", "red")
 </script>
 </body>
